@@ -1,0 +1,16 @@
+# Dependencies
+/node_modules/
+
+# Local/private runtime files
+/session.php
+.env
+.env.*
+*.log
+
+# Generated HTML files from Grunt
+/index.html
+/index_fr.html
+
+# OS/editor files
+Thumbs.db
+.DS_Store
