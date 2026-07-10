@@ -1,6 +1,0 @@
-﻿User-agent: *
-Disallow: /dolibarr/
-Disallow: /node_modules/
-Disallow: /journal_running/
-Disallow: /html5-css3/
-Disallow: /lgc/
