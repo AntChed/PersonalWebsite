@@ -69,29 +69,6 @@ Run Astro diagnostics:
 npm run check
 ```
 
-## Deployment
-
-Deploy the generated `dist/` directory to the web server.
-
-The contact form posts to `/assets/php/contactForm.php`. Astro copies this file from `public/assets/php/contactForm.php` into `dist/assets/php/contactForm.php` during the build, so the production host must support PHP mail for the form to send messages.
-
-## Google Analytics
-
-Google Analytics is supported through a public build-time environment variable:
-
-```bash
-PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX npm run build
-```
-
-On Windows PowerShell:
-
-```powershell
-$env:PUBLIC_GA_MEASUREMENT_ID = "G-XXXXXXXXXX"
-npm run build
-```
-
-If the variable is not set, the site builds without analytics scripts.
-
 ## Contact
 
 Website: <https://www.antoinechedebois.com>
