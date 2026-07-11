@@ -1,0 +1,15 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": "."
+  },
+  "include": ["src/**/*.ts", "src/**/*.astro"],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "Gruntfile.js",
+    "index_non_minify_fr.html",
+    "index_non_minify_gb.html",
+    "assets"
+  ]
+}

@@ -1,0 +1,384 @@
+---
+import '../styles/global.css';
+import {
+  Award,
+  BriefcaseBusiness,
+  ChartNoAxesColumnIncreasing,
+  Cloud,
+  Code,
+  Download,
+  Globe,
+  Mail,
+  MapPin,
+  Network,
+  Send,
+  ServerCog,
+  ShieldCheck,
+  Sparkles,
+  Target,
+  TrendingUp,
+  UsersRound,
+} from '@lucide/astro';
+import type { ResumeContent } from '../data/resume';
+import heroEn from '../../assets/images/bg1.jpg';
+import heroFr from '../../assets/images/bg5.jpg';
+import avatar from '../../assets/images/photo.jpg';
+import frenchFlag from '../../assets/images/French_flag.png?url';
+import ukFlag from '../../assets/images/UK_flag.png?url';
+import awsAiPractitionerBadge from '../../assets/images/AWS-Certified-AI-Practitioner_badge.png?url';
+import awsArchitectBadge from '../../assets/images/AWS-Certified-Solutions-Architect-Associate_badge.png?url';
+import awsDeveloperBadge from '../../assets/images/AWS-Certified-Developer-Associate_badge.png?url';
+import awsCloudPractitionerBadge from '../../assets/images/AWS-Certified-Cloud-Practitioner_badge.png?url';
+import scrumProductOwnerBadge from '../../assets/images/badge-pspoi.svg?url';
+import scrumMasterBadge from '../../assets/images/Scrumorg-PSMI_certification-112.png?url';
+import scrumDeveloperBadge from '../../assets/images/professional-scrum-developer.png?url';
+import cvEn from '../../assets/pdf/CV_Antoine_CHEDEBOIS_GB.pdf?url';
+import cvFr from '../../assets/pdf/CV_Antoine_Chedebois.pdf?url';
+import favicon from '../../favicon.ico?url';
+
+type Props = {
+  content: ResumeContent;
+};
+
+const { content } = Astro.props;
+const analyticsId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const heroImage = content.locale === 'fr' ? heroFr : heroEn;
+const resumeUrl = content.locale === 'fr' ? cvFr : cvEn;
+const currentYear = new Date().getFullYear();
+const impactIcons = [TrendingUp, UsersRound, Target];
+const scopeIcons = [ShieldCheck, UsersRound, Cloud, Code, Network, ServerCog];
+const alternateFlag = content.locale === 'fr' ? ukFlag : frenchFlag;
+const certificationBadges = [
+  { prefix: 'AWS Certified AI Practitioner', badge: awsAiPractitionerBadge },
+  { prefix: 'AWS Solutions Architect Associate', badge: awsArchitectBadge },
+  { prefix: 'AWS Certified Developer Associate', badge: awsDeveloperBadge },
+  { prefix: 'AWS Certified Cloud Practitioner', badge: awsCloudPractitionerBadge },
+  { prefix: 'Professional Scrum Product Owner I', badge: scrumProductOwnerBadge },
+  { prefix: 'Professional Scrum Master I', badge: scrumMasterBadge },
+  { prefix: 'Professional Scrum Developer I', badge: scrumDeveloperBadge },
+];
+
+const getCertificationBadge = (label: string) =>
+  certificationBadges.find((certification) => label.startsWith(certification.prefix))?.badge;
+const contactForm = content.locale === 'fr'
+  ? {
+      name: 'Nom',
+      email: 'E-mail',
+      message: 'Votre message',
+      submit: 'Envoyer',
+      loading: 'Envoi...',
+      required: 'Merci de remplir tous les champs.',
+      invalidEmail: 'Merci de saisir une adresse email valide.',
+      retry: 'Essayer à nouveau',
+      success: 'Votre demande a été enregistrée !',
+      error: "Impossible d'envoyer votre demande.",
+    }
+  : {
+      name: 'Name',
+      email: 'Email',
+      message: 'Your message',
+      submit: 'Send',
+      loading: 'Sending...',
+      required: 'Please fill in all fields.',
+      invalidEmail: 'Please enter a valid email address.',
+      retry: 'Try again',
+      success: 'Your message has been sent.',
+      error: 'Unable to send your message.',
+    };
+---
+
+<!doctype html>
+<html lang={content.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={content.metaDescription} />
+    <meta name="author" content="Antoine Chédebois" />
+    <title>{content.title}</title>
+    <link rel="icon" href={favicon} sizes="16x16" />
+    <link rel="canonical" href={content.urlPath} />
+    <link rel="alternate" href={content.alternatePath} />
+    {analyticsId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}></script>
+        <script is:inline>{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${analyticsId}');
+        `}</script>
+      </>
+    )}
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={content.urlPath}>Antoine Chédebois</a>
+      <nav aria-label="Main navigation">
+        <a href="#profile">{content.nav.profile}</a>
+        <a href="#impact">{content.nav.impact}</a>
+        <a href="#scope">{content.nav.value}</a>
+        <a href="#experience">{content.nav.experience}</a>
+        <a href="#contact">{content.nav.contact}</a>
+        <a class="language-link" href={content.alternatePath}>
+          <img class="language-link__flag" src={alternateFlag} alt="" width="24" height="16" aria-hidden="true" />
+          <span>{content.alternateLabel}</span>
+        </a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" style={`--hero-bg: url(${heroImage.src});`}>
+        <div class="hero__overlay">
+          <p class="eyebrow">Ex-Amazon · AWS Architect · Remote-first</p>
+          <h1>{content.hero.greeting}</h1>
+          <p class="hero__headline">{content.hero.headline}</p>
+          <p class="hero__availability">{content.hero.availability}</p>
+          <div class="hero__actions">
+            <a class="button button--primary" href="#contact">
+              <Send size={18} stroke-width={2.4} aria-hidden="true" />
+              <span>{content.hero.contactCta}</span>
+            </a>
+            <a class="button button--secondary" href={resumeUrl}>
+              <Download size={18} stroke-width={2.4} aria-hidden="true" />
+              <span>{content.hero.resumeCta}</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section id="profile" class="section profile-section">
+        <div class="section__inner profile-grid">
+          <img class="avatar" src={avatar.src} alt="Antoine Chédebois" width="320" height="320" loading="lazy" />
+          <div>
+            <p class="section-kicker">{content.profile.heading}</p>
+            <h2>{content.profile.title}</h2>
+            <p>{content.profile.body}</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="impact" class="impact-band">
+        <div class="section__inner">
+          <p class="section-kicker">{content.impact.heading}</p>
+          <div class="impact-grid">
+            {content.impact.items.map((item, index) => {
+              const Icon = impactIcons[index] ?? ChartNoAxesColumnIncreasing;
+
+              return (
+                <article class="impact-card">
+                  <span class="icon-badge">
+                    <Icon size={24} stroke-width={2.2} aria-hidden="true" />
+                  </span>
+                  <span class="impact-card__content">
+                    <strong>{item.value}</strong>
+                    <span>{item.label}</span>
+                  </span>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="scope" class="section">
+        <div class="section__inner">
+          <p class="section-kicker">{content.value.heading}</p>
+          <h2>{content.value.subtitle}</h2>
+          <div class="scope-grid">
+            {content.value.items.map((item, index) => {
+              const Icon = scopeIcons[index] ?? Sparkles;
+
+              return (
+                <article>
+                  <div class="scope-card__header">
+                    <span class="icon-badge icon-badge--soft">
+                      <Icon size={23} stroke-width={2.1} aria-hidden="true" />
+                    </span>
+                    <h3>{item.title}</h3>
+                  </div>
+                  <p>{item.body}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="section section--muted">
+        <div class="section__inner">
+          <p class="section-kicker">{content.experience.heading}</p>
+          <h2>{content.experience.subtitle}</h2>
+          <div class="timeline">
+            {content.experience.items.map((item) => (
+              <article class="timeline-item">
+                <div class="timeline-item__meta">
+                  <strong>
+                    <BriefcaseBusiness size={18} stroke-width={2.2} aria-hidden="true" />
+                    <span>{item.company}</span>
+                  </strong>
+                  <span>{item.period}</span>
+                </div>
+                <div class="timeline-item__body">
+                  <h3>{item.role}</h3>
+                  <p>{item.body}</p>
+                  {item.bullets && (
+                    <ul>
+                      {item.bullets.map((bullet) => <li>{bullet}</li>)}
+                    </ul>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section__inner">
+          <p class="section-kicker">{content.certifications.heading}</p>
+          <div class="certification-list">
+            {content.certifications.items.map((item) => {
+              const badge = getCertificationBadge(item);
+
+              return (
+                <span class:list={['certification-pill', badge && 'certification-pill--with-badge']}>
+                  {badge ? (
+                    <img class="certification-pill__badge" src={badge} alt="" loading="lazy" />
+                  ) : (
+                    <Award size={16} stroke-width={2.2} aria-hidden="true" />
+                  )}
+                  {item}
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact-section">
+        <div class="section__inner contact-layout">
+          <div class="contact-intro">
+            <p class="section-kicker">{content.contact.heading}</p>
+            <h2>{content.hero.availability}</h2>
+          </div>
+          <div class="contact-columns">
+            <div class="contact-details">
+            <p>{content.contact.body}</p>
+              <address>
+                <span>
+                  <MapPin size={18} stroke-width={2.2} aria-hidden="true" />
+                  {content.contact.location}
+                </span>
+                <a href={`mailto:${content.contact.email}`}>
+                  <Mail size={18} stroke-width={2.2} aria-hidden="true" />
+                  {content.contact.email}
+                </a>
+                <a href={content.contact.website}>
+                  <Globe size={18} stroke-width={2.2} aria-hidden="true" />
+                  {content.contact.website}
+                </a>
+                <a class="button button--primary" href={resumeUrl}>
+                  <Download size={18} stroke-width={2.4} aria-hidden="true" />
+                  <span>{content.hero.resumeCta}</span>
+                </a>
+              </address>
+            </div>
+            <form
+              id="contact-form"
+              class="contact-form"
+              action="/assets/php/contactForm.php"
+              method="post"
+              data-loading={contactForm.loading}
+              data-required={contactForm.required}
+              data-invalid-email={contactForm.invalidEmail}
+              data-retry={contactForm.retry}
+              data-success={contactForm.success}
+              data-error={contactForm.error}
+            >
+              <label class="sr-only" for="c_name">{contactForm.name}</label>
+              <input id="c_name" name="c_name" type="text" placeholder={contactForm.name} autocomplete="name" required />
+              <label class="sr-only" for="c_email">{contactForm.email}</label>
+              <input id="c_email" name="c_email" type="email" placeholder={contactForm.email} autocomplete="email" required />
+              <label class="sr-only" for="c_message">{contactForm.message}</label>
+              <textarea id="c_message" name="c_message" rows="7" placeholder={contactForm.message} required></textarea>
+              <button class="button button--primary" type="submit">
+                <Send size={18} stroke-width={2.4} aria-hidden="true" />
+                <span>{contactForm.submit}</span>
+              </button>
+              <p class="contact-form__response" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© 2016 - {currentYear} Antoine Chédebois</span>
+    </footer>
+    <script is:inline>
+      const contactForm = document.querySelector('#contact-form');
+
+      if (contactForm) {
+        const response = contactForm.querySelector('.contact-form__response');
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        const submitLabel = submitButton?.querySelector('span');
+        const defaultSubmitText = submitLabel?.textContent ?? '';
+
+        const showResponse = (message, type) => {
+          if (!response) return;
+          response.textContent = message;
+          response.dataset.type = type;
+        };
+
+        contactForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+
+          const formData = new FormData(contactForm);
+          const name = String(formData.get('c_name') ?? '').trim();
+          const email = String(formData.get('c_email') ?? '').trim();
+          const message = String(formData.get('c_message') ?? '').trim();
+          const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([^<>()[\]\\.,;:\s@"]+\.)+[^<>()[\]\\.,;:\s@"]{2,})$/i;
+
+          if (!name || !email || !message) {
+            showResponse(contactForm.dataset.required ?? '', 'error');
+            return;
+          }
+
+          if (!emailPattern.test(email)) {
+            showResponse(contactForm.dataset.invalidEmail ?? '', 'error');
+            return;
+          }
+
+          submitButton?.setAttribute('disabled', 'true');
+          if (submitLabel) submitLabel.textContent = contactForm.dataset.loading ?? defaultSubmitText;
+
+          try {
+            const result = await fetch(contactForm.action, {
+              method: 'POST',
+              body: formData,
+              headers: { Accept: 'application/json' },
+            });
+            const data = await result.json();
+
+            if (data.sendstatus === 1) {
+              showResponse(data.message ? data.message.replace(/<[^>]*>/g, '') : contactForm.dataset.success ?? '', 'success');
+              contactForm.reset();
+              return;
+            }
+
+            showResponse(data.message ?? contactForm.dataset.error ?? '', 'error');
+            if (submitLabel) submitLabel.textContent = contactForm.dataset.retry ?? defaultSubmitText;
+          } catch {
+            showResponse(contactForm.dataset.error ?? '', 'error');
+            if (submitLabel) submitLabel.textContent = contactForm.dataset.retry ?? defaultSubmitText;
+          } finally {
+            submitButton?.removeAttribute('disabled');
+            if (submitLabel?.textContent === contactForm.dataset.loading) {
+              submitLabel.textContent = defaultSubmitText;
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

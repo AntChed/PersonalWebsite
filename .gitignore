@@ -1,16 +1,22 @@
 # Dependencies
 /node_modules/
 
+# Build output
+/dist/
+/.astro/
+
 # Local/private runtime files
 /session.php
 .env
 .env.*
+!/.env.example
 *.log
 
-# Generated HTML files from Grunt
+# Legacy generated HTML files
 /index.html
 /index_fr.html
 
 # OS/editor files
 Thumbs.db
 .DS_Store
+~$*
