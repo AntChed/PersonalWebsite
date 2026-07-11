@@ -101,12 +101,12 @@ const contactForm = content.locale === 'fr'
     {analyticsId && (
       <>
         <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}></script>
-        <script is:inline>{`
+        <script is:inline define:vars={{ analyticsId }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', '${analyticsId}');
-        `}</script>
+          gtag('config', analyticsId);
+        </script>
       </>
     )}
   </head>

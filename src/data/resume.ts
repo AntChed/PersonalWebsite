@@ -87,7 +87,7 @@ export const resume: Record<Locale, ResumeContent> = {
     hero: {
       greeting: 'Hi, I am Antoine Chédebois',
       headline:
-        'Senior Software Engineer / Tech Lea | AWS Specialist | Ex-Amazon | E-commerce & logistics platforms',
+        'Senior Software Engineer / Tech Lead | AWS Specialist | Ex-Amazon | E-commerce & logistics platforms',
       availability:
         'Open to Senior Software Engineer, Staff Engineer, Tech Lead or Engineering Lead roles.',
       contactCta: 'Contact me',
