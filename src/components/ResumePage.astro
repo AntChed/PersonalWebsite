@@ -47,6 +47,7 @@ const resumeUrl = content.locale === 'fr' ? cvFr : cvEn;
 const currentYear = new Date().getFullYear();
 const impactIcons = [TrendingUp, UsersRound, Target];
 const scopeIcons = [ShieldCheck, UsersRound, Cloud, Code, Network, ServerCog];
+const caseStudyIcons = [Cloud, BriefcaseBusiness, Sparkles];
 const alternateFlag = content.locale === 'fr' ? ukFlag : frenchFlag;
 const certificationBadges = [
   { prefix: 'AWS Certified AI Practitioner', badge: awsAiPractitionerBadge },
@@ -118,6 +119,7 @@ const contactForm = content.locale === 'fr'
         <a href="#impact">{content.nav.impact}</a>
         <a href="#scope">{content.nav.value}</a>
         <a href="#experience">{content.nav.experience}</a>
+        <a href="#case-studies">{content.nav.caseStudies}</a>
         <a href="#contact">{content.nav.contact}</a>
         <a class="language-link" href={content.alternatePath}>
           <img class="language-link__flag" src={alternateFlag} alt="" width="24" height="16" aria-hidden="true" />
@@ -229,6 +231,60 @@ const contactForm = content.locale === 'fr'
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="case-studies" class="section">
+        <div class="section__inner">
+          <p class="section-kicker">{content.caseStudies.heading}</p>
+          <h2>{content.caseStudies.subtitle}</h2>
+          <div class="case-study-grid">
+            {content.caseStudies.items.map((item, index) => {
+              const Icon = caseStudyIcons[index] ?? Target;
+
+              return (
+                <article class="case-study-card">
+                  <div class="case-study-card__header">
+                    <span class="icon-badge icon-badge--soft">
+                      <Icon size={23} stroke-width={2.1} aria-hidden="true" />
+                    </span>
+                    <h3>{item.title}</h3>
+                  </div>
+                  <p class="case-study-card__body">{item.body}</p>
+                  <dl class="case-study-list">
+                    <div>
+                      <dt>{content.caseStudies.labels.context}</dt>
+                      <dd>{item.context}</dd>
+                    </div>
+                    <div>
+                      <dt>{content.caseStudies.labels.role}</dt>
+                      <dd>{item.role}</dd>
+                    </div>
+                    <div>
+                      <dt>{content.caseStudies.labels.delivered}</dt>
+                      <dd>{item.delivered}</dd>
+                    </div>
+                    <div>
+                      <dt>{content.caseStudies.labels.impact}</dt>
+                      <dd>{item.impact}</dd>
+                    </div>
+                  </dl>
+                  <p class="case-study-stack">
+                    <strong>{content.caseStudies.labels.stack}:</strong> {item.stack}
+                  </p>
+                  {item.links && (
+                    <div class="case-study-links">
+                      {item.links.map((link) => (
+                        <a href={link.href} target="_blank" rel="noopener noreferrer">
+                          {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

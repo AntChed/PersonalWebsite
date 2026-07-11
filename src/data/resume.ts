@@ -13,6 +13,7 @@ export type ResumeContent = {
     impact: string;
     value: string;
     experience: string;
+    caseStudies: string;
     contact: string;
   };
   hero: {
@@ -45,6 +46,27 @@ export type ResumeContent = {
       role: string;
       body: string;
       bullets?: string[];
+    }>;
+  };
+  caseStudies: {
+    heading: string;
+    subtitle: string;
+    labels: {
+      context: string;
+      role: string;
+      delivered: string;
+      impact: string;
+      stack: string;
+    };
+    items: Array<{
+      title: string;
+      body: string;
+      context: string;
+      role: string;
+      delivered: string;
+      impact: string;
+      stack: string;
+      links?: Array<{ label: string; href: string }>;
     }>;
   };
   certifications: {
@@ -82,6 +104,7 @@ export const resume: Record<Locale, ResumeContent> = {
       impact: 'Impact',
       value: 'Scope',
       experience: 'Experience',
+      caseStudies: 'Case Studies',
       contact: 'Contact'
     },
     hero: {
@@ -202,6 +225,55 @@ export const resume: Record<Locale, ResumeContent> = {
         }
       ]
     },
+    caseStudies: {
+      heading: 'Case Studies',
+      subtitle: '3 concrete examples of delivery, cloud engineering and product ownership.',
+      labels: {
+        context: 'Context',
+        role: 'My role',
+        delivered: 'What I delivered',
+        impact: 'Impact',
+        stack: 'Stack'
+      },
+      items: [
+        {
+          title: 'Amazon Reverse Logistics Platform',
+          body:
+            'Built and operated worldwide internal application embedded in Zebra scanners for high-volume reverse logistics workflow in an international team.',
+          context: 'Reverse logistics operations, production-grade internal tool and users in all Amazon regions.',
+          role: 'Hands-on senior engineer and technical lead for a 5-engineer team.',
+          delivered:
+            'AWS serverless architecture, full-stack features, CI/CD, monitoring, production support and recruitment loops.',
+          impact: 'Supported parcel return workflows at 100k+ scans/day.',
+          stack:
+            'TypeScript, React, Angular, Python, Flask, Lambda, API Gateway, SQS, SNS, DynamoDB, RDS, CloudWatch.'
+        },
+        {
+          title: 'High-Traffic Retail E-commerce Platform',
+          body:
+            'Leading delivery and reliability improvements for a large-scale retail e-commerce platform generating 100M€+ annual revenue.',
+          context: 'Critical e-commerce platform, production constraints, multiple systems and third-party integrations.',
+          role: 'Hands-on engineering squad lead for 7+ software and quality engineers.',
+          delivered:
+            'Delivery ownership, code reviews, technical decisions, CI/CD improvements, observability and incident analysis.',
+          impact:
+            'Improved team execution, production reliability and technical alignment across frontend, backend, cloud and third-party systems.',
+          stack: 'Vue, TypeScript, Node.js, Alokai, AWS, PHP, GitLab CI, Terraform, Datadog, New Relic.'
+        },
+        {
+          title: 'AI-Assisted Developer Productivity Product',
+          body:
+            'Designed and built an AI-assisted product to analyze repositories and generate technical insights for engineering teams.',
+          context: 'Developer productivity, code analysis, AI-assisted delivery and technical reporting.',
+          role: 'Solo product engineer, from idea to architecture and delivery.',
+          delivered: 'Product framing, frontend, backend, AI integration, deployment and technical reporting workflow.',
+          impact:
+            'Demonstrates hands-on ownership, modern engineering practices and ability to ship independently.',
+          stack: 'TypeScript, Next.js, PostgreSQL, OpenAI API, GitHub integration, Vercel, Railway, RabbitMQ, Python',
+          links: [{ label: 'RepoInsightX', href: 'https://repoinsightx.com' }]
+        }
+      ]
+    },
     certifications: {
       heading: 'Certifications & Training',
       items: [
@@ -239,6 +311,7 @@ export const resume: Record<Locale, ResumeContent> = {
       impact: 'Impact',
       value: 'Scope',
       experience: 'Expérience',
+      caseStudies: 'Cas concrets',
       contact: 'Contact'
     },
     hero: {
@@ -356,6 +429,55 @@ export const resume: Record<Locale, ResumeContent> = {
           role: 'Développeur Web / Webmaster / Ingénieur avant-vente',
           body:
             "Création et maintenance d'applications internet, intranet et extranet. Production de dossiers techniques et économiques pour appels d'offres nationaux et internationaux."
+        }
+      ]
+    },
+    caseStudies: {
+      heading: 'Cas concrets',
+      subtitle: '3 preuves concrètes de delivery, cloud engineering et ownership produit.',
+      labels: {
+        context: 'Contexte',
+        role: 'Mon rôle',
+        delivered: 'Ce que j’ai livré',
+        impact: 'Impact',
+        stack: 'Stack'
+      },
+      items: [
+        {
+          title: 'Plateforme Amazon Reverse Logistics',
+          body:
+            'Construction et exploitation d’une application interne mondiale embarquée dans des scanners Zebra pour des workflows de reverse logistics à fort volume, dans une équipe internationale.',
+          context: 'Opérations de reverse logistics, outil interne de production et utilisateurs dans toutes les régions Amazon.',
+          role: 'Senior engineer hands-on et technical lead d’une équipe de 5 engineers.',
+          delivered:
+            'Architecture AWS serverless, features full-stack, CI/CD, monitoring, support de production et boucles de recrutement.',
+          impact: 'Support de workflows de retour colis à 100k+ scans/jour.',
+          stack:
+            'TypeScript, React, Angular, Python, Flask, Lambda, API Gateway, SQS, SNS, DynamoDB, RDS, CloudWatch.'
+        },
+        {
+          title: 'Plateforme e-commerce retail à fort trafic',
+          body:
+            'Pilotage du delivery et de la fiabilité d’une plateforme e-commerce retail générant 100M€+ de chiffre d’affaires annuel.',
+          context: 'Plateforme e-commerce critique, contraintes de production, systèmes multiples et intégrations tierces.',
+          role: 'Engineering squad lead hands-on pour 7+ software et quality engineers.',
+          delivered:
+            'Ownership delivery, code reviews, décisions techniques, améliorations CI/CD, observabilité et analyse d’incidents.',
+          impact:
+            'Amélioration de l’exécution d’équipe, de la fiabilité production et de l’alignement technique frontend, backend, cloud et systèmes tiers.',
+          stack: 'Vue, TypeScript, Node.js, Alokai, AWS, PHP, GitLab CI, Terraform, Datadog, New Relic.'
+        },
+        {
+          title: 'Produit de productivité développeur assisté par IA',
+          body:
+            'Conception et réalisation d’un produit assisté par IA pour analyser des repositories et générer des insights techniques pour les équipes engineering.',
+          context: 'Productivité développeur, analyse de code, delivery assisté par IA et reporting technique.',
+          role: 'Solo product engineer, de l’idée à l’architecture et au delivery.',
+          delivered: 'Cadrage produit, frontend, backend, intégration IA, déploiement et workflow de reporting technique.',
+          impact:
+            'Démontre une capacité d’ownership hands-on, des pratiques engineering modernes et une capacité à shipper en autonomie.',
+          stack: 'TypeScript, Next.js, PostgreSQL, OpenAI API, intégration GitHub, Vercel, Railway, RabbitMQ, Python',
+          links: [{ label: 'RepoInsightX', href: 'https://repoinsightx.com' }]
         }
       ]
     },
