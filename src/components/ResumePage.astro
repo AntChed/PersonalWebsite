@@ -18,6 +18,8 @@ import {
   Target,
   TrendingUp,
   UsersRound,
+  ExternalLink,
+  GitBranch
 } from '@lucide/astro';
 import type { ResumeContent } from '../data/resume';
 import heroEn from '../../assets/images/bg1.jpg';
@@ -47,7 +49,7 @@ const resumeUrl = content.locale === 'fr' ? cvFr : cvEn;
 const currentYear = new Date().getFullYear();
 const impactIcons = [TrendingUp, UsersRound, Target];
 const scopeIcons = [ShieldCheck, UsersRound, Cloud, Code, Network, ServerCog];
-const caseStudyIcons = [Cloud, BriefcaseBusiness, Sparkles];
+const caseStudyIcons = [Cloud, BriefcaseBusiness];
 const alternateFlag = content.locale === 'fr' ? ukFlag : frenchFlag;
 const certificationBadges = [
   { prefix: 'AWS Certified AI Practitioner', badge: awsAiPractitionerBadge },
@@ -120,6 +122,7 @@ const contactForm = content.locale === 'fr'
         <a href="#scope">{content.nav.value}</a>
         <a href="#experience">{content.nav.experience}</a>
         <a href="#case-studies">{content.nav.caseStudies}</a>
+        <a href="#projects">{content.nav.projects}</a>
         <a href="#contact">{content.nav.contact}</a>
         <a class="language-link" href={content.alternatePath}>
           <img class="language-link__flag" src={alternateFlag} alt="" width="24" height="16" aria-hidden="true" />
@@ -285,6 +288,71 @@ const contactForm = content.locale === 'fr'
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="section section--muted">
+        <div class="section__inner">
+          <p class="section-kicker">{content.projects.heading}</p>
+          <h2>{content.projects.subtitle}</h2>
+      
+          <div class="project-grid">
+            {content.projects.items.map((project) => (
+              <article class="project-card">
+                <div class="project-card__media">
+                  <img
+                    class:list={[
+                      'project-card__image',
+                      project.imageFit === 'contain' && 'project-card__image--contain'
+                    ]}
+                    src={project.image}
+                    alt={project.imageAlt}
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="project-card__content">
+                  <div class="project-card__header">
+                    <h3>{project.title}</h3>
+                    <p class="project-card__tagline">{project.tagline}</p>
+                  </div>
+
+                  <p>{project.body}</p>
+
+                  <div class="project-stack">
+                    {project.stack.map((technology) => (
+                      <span class="project-stack__item">{technology}</span>
+                    ))}
+                  </div>
+
+                  {project.links && (
+                    <div class="project-links">
+                      {project.links.map((link) => {
+                        const isGithub = link.href.includes('github.com');
+
+                        return (
+                          <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {isGithub ? (
+                              <GitBranch size={17} stroke-width={2.2} aria-hidden="true" />
+                            ) : (
+                              <ExternalLink size={17} stroke-width={2.2} aria-hidden="true" />
+                            )}
+
+                            <span>{link.label}</span>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

@@ -14,6 +14,7 @@ export type ResumeContent = {
     value: string;
     experience: string;
     caseStudies: string;
+    projects: string;
     contact: string;
   };
   hero: {
@@ -69,6 +70,23 @@ export type ResumeContent = {
       links?: Array<{ label: string; href: string }>;
     }>;
   };
+  projects: {
+    heading: string;
+    subtitle: string;
+    items: Array<{
+      title: string;
+      tagline: string;
+      body: string;
+      image: string;
+      imageAlt: string;
+      imageFit?: 'cover' | 'contain';
+      stack: string[];
+      links?: Array<{
+        label: string;
+        href: string;
+      }>;
+    }>;
+  };
   certifications: {
     heading: string;
     items: string[];
@@ -105,6 +123,7 @@ export const resume: Record<Locale, ResumeContent> = {
       value: 'Scope',
       experience: 'Experience',
       caseStudies: 'Case Studies',
+      projects: 'Projects',
       contact: 'Contact'
     },
     hero: {
@@ -227,7 +246,7 @@ export const resume: Record<Locale, ResumeContent> = {
     },
     caseStudies: {
       heading: 'Case Studies',
-      subtitle: '3 concrete examples of delivery, cloud engineering and product ownership.',
+      subtitle: '2 concrete examples of delivery, cloud engineering and product ownership.',
       labels: {
         context: 'Context',
         role: 'My role',
@@ -259,18 +278,88 @@ export const resume: Record<Locale, ResumeContent> = {
           impact:
             'Improved team execution, production reliability and technical alignment across frontend, backend, cloud and third-party systems.',
           stack: 'Vue, TypeScript, Node.js, Alokai, AWS, PHP, GitLab CI, Terraform, Datadog, New Relic.'
+        }
+      ]
+    },
+    projects: {
+      heading: 'Projects',
+      subtitle: 'Products I designed, built and shipped independently.',
+      items: [
+        {
+          title: 'Valyrona',
+          tagline: 'Profitability SaaS for online sellers',
+          image: '/assets/projects/valyrona-dashboard.png',
+          imageAlt: 'Valyrona profitability dashboard',
+          imageFit: 'cover',
+          body:
+            'Designed and built a full-stack SaaS platform helping online sellers track products, sales, expenses, margins and profitability. The product includes authentication, user isolation, dashboards, CSV import/export and multilingual support.',
+          stack: [
+            'Next.js',
+            'TypeScript',
+            'Fastify',
+            'PostgreSQL',
+            'Prisma',
+            'OpenAPI',
+            'Vercel'
+          ],
+          links: [
+            {
+              label: 'Visit Valyrona',
+              href: 'https://valyrona.com'
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/AntChed/Valyrona'
+            }
+          ]
         },
         {
-          title: 'AI-Assisted Developer Productivity Product',
+          title: 'Chess Elite',
+          tagline: 'Mobile chess application for Android',
+          image: '/assets/projects/chess-elite.png',
+          imageAlt: 'Chess Elite Android chess application',
+          imageFit: 'contain',
           body:
-            'Designed and built an AI-assisted product to analyze repositories and generate technical insights for engineering teams.',
-          context: 'Developer productivity, code analysis, AI-assisted delivery and technical reporting.',
-          role: 'Solo product engineer, from idea to architecture and delivery.',
-          delivered: 'Product framing, frontend, backend, AI integration, deployment and technical reporting workflow.',
-          impact:
-            'Demonstrates hands-on ownership, modern engineering practices and ability to ship independently.',
-          stack: 'TypeScript, Next.js, PostgreSQL, OpenAI API, GitHub integration, Vercel, Railway, RabbitMQ, Python',
-          links: [{ label: 'RepoInsightX', href: 'https://repoinsightx.com' }]
+            'Designed and developed a mobile chess application featuring local games, AI opponents with multiple difficulty levels, chess clocks, move history, board themes, piece skins, player progression and an online multiplayer architecture.',
+          stack: [
+            'React Native',
+            'Expo',
+            'TypeScript',
+            'chess.js',
+            'Node.js',
+            'PostgreSQL'
+          ],
+          links: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/AntChed/ChessElite'
+            }
+          ]
+        },
+        {
+          title: 'RepoInsightX',
+          tagline: 'AI-assisted repository analysis',
+          image: '/assets/projects/repoinsightx.png',
+          imageAlt: 'RepoInsightX AI repository analysis interface',
+          imageFit: 'cover',
+          body:
+            'Designed and built an AI-assisted developer productivity product that analyzes software repositories and generates technical insights and engineering reports.',
+          stack: [
+            'TypeScript',
+            'Next.js',
+            'Python',
+            'PostgreSQL',
+            'OpenAI API',
+            'GitHub API',
+            'Vercel',
+            'Railway'
+          ],
+          links: [
+            {
+              label: 'Visit RepoInsightX',
+              href: 'https://repoinsightx.com'
+            }
+          ]
         }
       ]
     },
@@ -312,6 +401,7 @@ export const resume: Record<Locale, ResumeContent> = {
       value: 'Scope',
       experience: 'Expérience',
       caseStudies: 'Cas concrets',
+      projects: 'Réalisations',
       contact: 'Contact'
     },
     hero: {
@@ -434,7 +524,7 @@ export const resume: Record<Locale, ResumeContent> = {
     },
     caseStudies: {
       heading: 'Cas concrets',
-      subtitle: '3 preuves concrètes de delivery, cloud engineering et ownership produit.',
+      subtitle: '2 preuves concrètes de delivery, cloud engineering et ownership produit.',
       labels: {
         context: 'Contexte',
         role: 'Mon rôle',
@@ -466,18 +556,89 @@ export const resume: Record<Locale, ResumeContent> = {
           impact:
             'Amélioration de l’exécution d’équipe, de la fiabilité production et de l’alignement technique frontend, backend, cloud et systèmes tiers.',
           stack: 'Vue, TypeScript, Node.js, Alokai, AWS, PHP, GitLab CI, Terraform, Datadog, New Relic.'
+        }
+      ]
+    },
+    projects: {
+      heading: 'Réalisations',
+      subtitle:
+        'Des produits conçus, développés et mis en production de bout en bout.',
+      items: [
+        {
+          title: 'Valyrona',
+          tagline: 'SaaS de suivi de rentabilité pour vendeurs en ligne',
+          image: '/assets/projects/valyrona-dashboard.png',
+          imageAlt: 'Dashboard de rentabilité Valyrona',
+          imageFit: 'cover',
+          body:
+            'Conception et développement complet d’une plateforme SaaS permettant aux vendeurs en ligne de suivre leurs produits, ventes, dépenses, marges et rentabilité. Le produit intègre notamment l’authentification, l’isolation des utilisateurs, des dashboards, l’import/export CSV et la gestion multilingue.',
+          stack: [
+            'Next.js',
+            'TypeScript',
+            'Fastify',
+            'PostgreSQL',
+            'Prisma',
+            'OpenAPI',
+            'Vercel'
+          ],
+          links: [
+            {
+              label: 'Voir Valyrona',
+              href: 'https://valyrona.com'
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/AntChed/Valyrona'
+            }
+          ]
         },
         {
-          title: 'Produit de productivité développeur assisté par IA',
+          title: 'Chess Elite',
+          tagline: 'Application mobile d’échecs pour Android',
+          image: '/assets/projects/chess-elite.png',
+          imageAlt: 'Application Android Chess Elite',
+          imageFit: 'contain',
           body:
-            'Conception et réalisation d’un produit assisté par IA pour analyser des repositories et générer des insights techniques pour les équipes engineering.',
-          context: 'Productivité développeur, analyse de code, delivery assisté par IA et reporting technique.',
-          role: 'Solo product engineer, de l’idée à l’architecture et au delivery.',
-          delivered: 'Cadrage produit, frontend, backend, intégration IA, déploiement et workflow de reporting technique.',
-          impact:
-            'Démontre une capacité d’ownership hands-on, des pratiques engineering modernes et une capacité à shipper en autonomie.',
-          stack: 'TypeScript, Next.js, PostgreSQL, OpenAI API, intégration GitHub, Vercel, Railway, RabbitMQ, Python',
-          links: [{ label: 'RepoInsightX', href: 'https://repoinsightx.com' }]
+            'Conception et développement d’une application mobile d’échecs proposant parties locales, adversaire IA à plusieurs niveaux, chronomètres, historique des coups, thèmes d’échiquier, skins de pièces, progression joueur et architecture multijoueur en ligne.',
+          stack: [
+            'React Native',
+            'Expo',
+            'TypeScript',
+            'chess.js',
+            'Node.js',
+            'PostgreSQL'
+          ],
+          links: [
+            {
+              label: 'GitHub',
+              href: 'https://github.com/AntChed/ChessElite'
+            }
+          ]
+        },
+        {
+          title: 'RepoInsightX',
+          tagline: 'Analyse de repositories assistée par IA',
+          image: '/assets/projects/repoinsightx.png',
+          imageAlt: 'Interface d’analyse de repositories RepoInsightX',
+          imageFit: 'cover',
+          body:
+            'Conception et réalisation d’un produit de productivité développeur capable d’analyser des repositories logiciels et de générer des insights techniques et des rapports engineering grâce à l’IA.',
+          stack: [
+            'TypeScript',
+            'Next.js',
+            'Python',
+            'PostgreSQL',
+            'OpenAI API',
+            'GitHub API',
+            'Vercel',
+            'Railway'
+          ],
+          links: [
+            {
+              label: 'Voir RepoInsightX',
+              href: 'https://repoinsightx.com'
+            }
+          ]
         }
       ]
     },
